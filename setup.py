@@ -24,10 +24,7 @@ setup(name='importvers',
       packages=['importvers'],
       python_requires='>=3.0',
       install_requires=[
-          'git',
-          'os',
-          'sys',
-          'importlib',
-          'shutil'
+          'gitpython',
+          'importlib'
       ],
       zip_safe=False)

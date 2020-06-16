@@ -11,7 +11,13 @@ def importvers(repo_path, module_name, vers, tmp_path='.'):
     repo.git.worktree('add', tmp_path+'/.tmp', vers)
 
     # import path
-    module = importpath(tmp_path+'/.tmp', module_name)
+    try:
+        module = importpath(tmp_path+'/.tmp', module_name)
+    except:
+        # if import fails, prune working tree before returning exception
+        shutil.rmtree(tmp_path+'/.tmp')
+        repo.git.worktree('prune')
+        raise
 
     # switch repository back
     shutil.rmtree(tmp_path+'/.tmp')
