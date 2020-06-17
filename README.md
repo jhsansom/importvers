@@ -16,18 +16,22 @@ pip install importvers
 
 ## Usage
 
+For a helpful usage example, please refer to the [example folder](example). Sample code is displayed below.
 
 ```Python
 from importvers import importvers
 
-# import and use files from a newer commit
-fmtrack_new = importvers('../../fmtrack', 'fmtrack', '698f04c')
-tracker = fmtrack_new.FMTracker()
-tracker.save_all('./test')
+# import a newer version of the module
+func_new = importvers('..', 'example.sample_func', '9f9906b')
 
+# import an older version of the module
+func_old = importvers('..', 'example.sample_func', 'c8bc3ec')
+```
 
-# import and use files from an older commit
-fmtrack_old = importvers('../../fmtrack', 'fmtrack', '8e4a0c2')
-tracker = fmtrack_old.FMTracker()
-tracker.save_all()
+To view commit hashes, navigate to your repository and run the command `git log --oneline`. To tag a particular commit, use `git checkout` and `git tag` as follows:
+
+```Bash
+git checkout <hash>
+git tag -a "<tag>"
+git checkout master
 ```
