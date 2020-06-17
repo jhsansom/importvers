@@ -1,10 +1,10 @@
 # ImportVers
 
-This is a small module that allows scientific programmers to easily document experiments using git. It allows you to save source code in a single repository and import files from different working trees into one Python script. It can be useful for the following:
+ImportVers is a tool that allows scientific programmers to easily document experiments using git. It allows you to save source code in a single repository and import files from different working trees into one Python script. It can be useful for the following:
 
-1. If you have multiple ideas, you can create different branches within your source code. ImportVers allows you to import all of them into one Python script for easy comparison.
+1. If you have multiple ideas, you can create different branches within your repository. ImportVers allows you to import all of them into one Python script for easy comparison.
 2. If you would like to compare the latest commit to an older one, you can import both and compare them in one Python script.
-3. You can place these test scripts or Jupyter Notebooks into your repository for later reference. Any user in the future will be able to easily reproduce results without having to manually add working trees for comparison.
+3. You can save these test scripts or Jupyter Notebooks into your repository for later reference. Any user in the future will be able to easily reproduce results without having to manually add working trees for comparison.
 
 ## Installation
 
