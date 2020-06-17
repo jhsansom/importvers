@@ -4,7 +4,7 @@ import importlib
 import shutil
 import copy
 
-def importvers(repo_path, module_name, vers, tmp_path='./.tmp'):
+def importvers(repo_path, module_name, vers, tmp_path=None):
     """Returns working tree version
 
 	Parameters
@@ -24,7 +24,16 @@ def importvers(repo_path, module_name, vers, tmp_path='./.tmp'):
 
 	"""
 
+    # if a package is already imported under the same module name,
+    # importvers reorganizes it during runtime
+    flag = module_name in sys.modules.keys()
+    if flag:
+        sys.modules[module_name+'_control'] = sys.modules[module_name]
+        sys.modules.pop(module_name)
+
     # finds the absolute path of tmp_path
+    if tmp_path is None:
+        tmp_path = './.tmp'
     tmp_path = os.path.abspath(tmp_path+'_'+vers)
 
     # add worktree for the version in question for this test
@@ -52,6 +61,11 @@ def importvers(repo_path, module_name, vers, tmp_path='./.tmp'):
 
     # removes module with undifferentiated name so another version can be loaded if necessary
     sys.modules.pop(module_name)
+
+    # re-adds original module if it is there
+    if flag:
+        sys.modules[module_name] = sys.modules[module_name+'_control']
+        sys.modules.pop(module_name+'_control')
 
     return module
 
