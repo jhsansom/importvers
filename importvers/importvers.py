@@ -7,9 +7,9 @@ import copy
 def importvers(repo_path, module_name, vers, tmp_path=None):
     """Returns working tree version
 
-	Parameters
-	----------
-	repo_path : str
+    Parameters
+    ----------
+    repo_path : str
         Filepath to repository (relative or absolute)
     module_name : str
         Using normal Python import syntax, this is the module you wish to import from the package
@@ -18,11 +18,11 @@ def importvers(repo_path, module_name, vers, tmp_path=None):
     tmp_path : str
         Path to the temporary folder created for the working tree
 
-	Returns
-	----------
-	module
+    Returns
+    ----------
+    module
 
-	"""
+    """
 
     # if a package is already imported under the same module name,
     # importvers reorganizes it during runtime
