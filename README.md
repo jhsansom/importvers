@@ -37,7 +37,7 @@ To view commit hashes, navigate to your repository and run the command `git log 
 ```Bash
 git checkout <hash>
 git tag -a "<tag>"
-git checkout master
+git checkout -
 ```
 
 ## Additional Comments
