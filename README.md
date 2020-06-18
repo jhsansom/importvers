@@ -34,7 +34,7 @@ func_old = importvers('..', 'example.sample_func', 'c8bc3ec')
 
 To view commit hashes, navigate to your repository and run the command `git log --oneline`. To tag a particular commit, use `git checkout` and `git tag` as follows:
 
-```Bash
+```
 git checkout <hash>
 git tag -a "<tag>"
 git checkout -
