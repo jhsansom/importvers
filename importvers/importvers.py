@@ -3,6 +3,7 @@ import os, sys
 import importlib
 import shutil
 import copy
+import numpy as np
 
 def importvers(repo_path, module_name, vers, tmp_path=None):
     """Returns working tree version
@@ -24,12 +25,18 @@ def importvers(repo_path, module_name, vers, tmp_path=None):
 
     """
 
+    # modified module name that will end up in sys.modules
+    modified_name = module_name+'_'+vers
+
     # if a package is already imported under the same module name,
     # importvers reorganizes it during runtime
     flag = module_name in sys.modules.keys()
     if flag:
         sys.modules[module_name+'_control'] = sys.modules[module_name]
         sys.modules.pop(module_name)
+
+    # snapshot of modules before any importing occurs
+    orig_modules = np.array(list(sys.modules.keys()))
 
     # finds the absolute path of tmp_path
     if tmp_path is None:
@@ -54,14 +61,23 @@ def importvers(repo_path, module_name, vers, tmp_path=None):
     repo.git.worktree('prune')
 
     # rename to differentiate modules from one another
-    module.__name__ = module_name+'_'+vers
+    module.__name__ = modified_name
 
     # renames module to unique name
-    sys.modules[module_name+'_'+vers] = module
+    sys.modules[modified_name] = module
 
     # removes module with undifferentiated name so another version can be loaded if necessary
     sys.modules.pop(module_name)
 
+    # remove additional names of modules imported with primary module.
+    # Because they are named the same as the original module (module_name), 
+    # they create conflicts between different commits
+    now_modules = np.array(list(sys.modules.keys()))
+    diff = np.setdiff1d(now_modules, orig_modules)
+    for elem in diff:
+        if module_name in elem and elem != modified_name:
+            sys.modules.pop(elem)
+    
     # re-adds original module if it is there
     if flag:
         sys.modules[module_name] = sys.modules[module_name+'_control']
