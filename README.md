@@ -42,4 +42,4 @@ git checkout -
 
 ## Additional Comments
 
-This package is incredibly small (under 100 lines), and I only made it because I needed it for other work I was doing. I am not an expert in git or Python, but I couldn't find anything similar to this online, so I decided to quickly transform it into a package. If you have any comments or suggestions, please just shoot me an email or create a pull request!
+I needed this package for my own work, so I decided to make it public! Hopefully it can be of use to someone. I am by no means an expert in git or Python, so please create a pull request or message me if you have any comments or suggestions.
